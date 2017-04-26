@@ -1,0 +1,15 @@
+{
+  "root": {
+    "log" :{
+      "start" : "logging start"
+    }
+  },
+  "zh-Hans":{
+    "log" :{
+      "start" : "日志开始"
+    }
+  }
+}
+
+
+

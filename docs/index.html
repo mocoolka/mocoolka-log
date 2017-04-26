@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-mocoolka-log.html">mocoolka-log</a><ul class='methods'><li data-type='method'><a href="module-mocoolka-log.html#~alert">alert</a></li><li data-type='method'><a href="module-mocoolka-log.html#~critical">critical</a></li><li data-type='method'><a href="module-mocoolka-log.html#~debug">debug</a></li><li data-type='method'><a href="module-mocoolka-log.html#~emergency">emergency</a></li><li data-type='method'><a href="module-mocoolka-log.html#~error">error</a></li><li data-type='method'><a href="module-mocoolka-log.html#~info">info</a></li><li data-type='method'><a href="module-mocoolka-log.html#~init">init</a></li><li data-type='method'><a href="module-mocoolka-log.html#~notice">notice</a></li><li data-type='method'><a href="module-mocoolka-log.html#~rfc5424">rfc5424</a></li><li data-type='method'><a href="module-mocoolka-log.html#~warning">warning</a></li></ul></li><li><a href="module-mocoolka-log-service.html">mocoolka-log-service</a><ul class='methods'><li data-type='method'><a href="module-mocoolka-log-service.html#~startLogService">startLogService</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><h1>mocoolka-log</h1><p><a href="https://www.npmjs.com/package/mocoolka-log"><img src="https://img.shields.io/npm/v/mocoolka-log.svg" alt="npm package"></a> 
+<a href="LICENSE.md"><img src="https://img.shields.io/npm/l/mocoolka-log.svg" alt="license"></a>
+<a href="http://travis-ci.org/mocoolka/mocoolka-log"><img src="https://secure.travis-ci.org/mocoolka/mocoolka-log.png?branch=master" alt="Build Status"></a>
+Mocoolka-log is base module for mocoolka application and 
+write message to file or database or mail.
+<a href="https://nodei.co/npm/mocoolka-log/"><img src="https://nodei.co/npm/mocoolka-log.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="NPM"></a>
+<a href="https://codecov.io/gh/mocoolka/mocoolka-log"><img src="https://codecov.io/gh/mocoolka/mocoolka-log/branch/master/graph/badge.svg" alt="codecov"></a></p>
+<h2>Install</h2><pre class="prettyprint source lang-bash"><code>$ npm install mocoolka-log</code></pre><h2>Usage</h2><p>first install mocoolka-setting and mocoolka-i18n</p>
+<pre class="prettyprint source lang-bash"><code>$ npm install mocoolka-setting
+$ npm install mocoolka-i18n</code></pre><p>edit log config in app.mk-setting.json </p>
+<pre class="prettyprint source lang-bash"><code>  &quot;mocoolka-log&quot;: {
+    &quot;log4js&quot;: {
+      &quot;appenders&quot;: {
+        &quot;mail&quot;: {
+          &quot;type&quot;: &quot;smtp&quot;,
+          &quot;recipients&quot;: &quot;fastspeeed@mocoolka.com&quot;,
+          &quot;from&quot;: &quot;admin@mocoolka.com&quot;,
+          &quot;sendInterval&quot;: 5,
+          &quot;transport&quot;: &quot;SMTP&quot;,
+          &quot;SMTP&quot;: {
+            &quot;host&quot;: &quot;smtp.mocoolka.com&quot;,
+            &quot;secureConnection&quot;: true,
+            &quot;port&quot;: 25,
+            &quot;auth&quot;: {
+              &quot;user&quot;: &quot;admin@mocoolka.com&quot;,
+              &quot;pass&quot;: &quot;*****&quot;
+            },
+            &quot;debug&quot;: true
+          }
+        }
+      },
+      &quot;categories&quot;: {
+        &quot;default&quot;: {
+          &quot;appenders&quot;: [
+            &quot;mocoolka&quot;,
+            &quot;mail&quot;
+          ],
+          &quot;level&quot;: &quot;debug&quot;
+        }
+      }
+    }
+  }</code></pre><p>start micro service </p>
+<pre class="prettyprint source lang-bash"><code> const settingService = require('mocoolka-setting');
+ settingService(__dirname);
+ const i18nService = require('mocoolka-i18n');
+ i18nService(__dirname);
+ const logService = require('mocoolka-log');
+ logService();</code></pre><p>log using level</p>
+<pre class="prettyprint source lang-bash"><code>const {serviceTools } = require('mocoolka-tools');
+
+serviceTools.standClientPromise('mocoolka-log','rfc5424',
+  {level:'info',message:{id:'test123'}}).catch(error=>{
+      console.error(error);
+  });
+serviceTools.standClientPromise('mocoolka-log','emergency',
+  {id:'emergency-client'}).catch(error=>{
+  console.error(error);
+});
+serviceTools.standClientPromise('mocoolka-log','alert',
+  {id:'alert-client'}).catch(error=>{
+  console.error(error);
+});
+serviceTools.standClientPromise('mocoolka-log','critical',
+  {id:'critical-client'}).catch(error=>{
+  console.error(error);
+});
+serviceTools.standClientPromise('mocoolka-log','error',
+  {id:'error-client'}).catch(error=>{
+  console.error(error);
+});
+serviceTools.standClientPromise('mocoolka-log','warning',
+  {id:'warning-client'}).catch(error=>{
+  console.error(error);
+});
+serviceTools.standClientPromise('mocoolka-log','notice',
+  {id:'notice-client'}).catch(error=>{
+  console.error(error);
+});
+serviceTools.standClientPromise('mocoolka-log','info',
+  {id:'info-client'}).catch(error=>{
+  console.error(error);
+});
+serviceTools.standClientPromise('mocoolka-log','debug',
+  {id:'debug-client'}).catch(error=>{
+  console.error(error);
+});</code></pre><h2>Documentation</h2><p>Available <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/mocoolka/mocoolka-log/master/docs/index.html">here</a></p>
+<h2>License</h2><p>Licensed under the MIT, version 2.0. (see <a href="LICENSE.md">MIT</a>).</p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Apr 26 2017 10:55:37 GMT+0800 (中国标准时间) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
