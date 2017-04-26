@@ -2,10 +2,13 @@
 [![npm package](https://img.shields.io/npm/v/mocoolka-log.svg)](https://www.npmjs.com/package/mocoolka-log) 
 [![license](https://img.shields.io/npm/l/mocoolka-log.svg)](LICENSE.md)
 [![Build Status](https://secure.travis-ci.org/mocoolka/mocoolka-log.png?branch=master)](http://travis-ci.org/mocoolka/mocoolka-log)
+[![codecov](https://codecov.io/gh/mocoolka/mocoolka-log/branch/master/graph/badge.svg)](https://codecov.io/gh/mocoolka/mocoolka-log)
+
 Mocoolka-log is base module for mocoolka application and 
 write message to file or database or mail.
+
 [![NPM](https://nodei.co/npm/mocoolka-log.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mocoolka-log/)
-[![codecov](https://codecov.io/gh/mocoolka/mocoolka-log/branch/master/graph/badge.svg)](https://codecov.io/gh/mocoolka/mocoolka-log)
+
 
 ## Install
 
